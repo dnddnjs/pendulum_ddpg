@@ -1,10 +1,10 @@
-from collections import deque
-import numpy as np
-from keras.layers import Dense, Input, Add, Concatenate
+from keras.layers import Dense, Input, Add
 from keras.optimizers import Adam
 from keras.models import Model
 from keras import backend as K
+from collections import deque
 import tensorflow as tf
+import numpy as np
 import random
 import gym
 
@@ -47,7 +47,6 @@ class DDPGAgent:
         actor = Model(inputs=input, outputs=action)
         return actor
 
-    # 정책신경망을 업데이트하는 함수
     def actor_optimizer(self):
         actions = self.actor.output
         dqda = tf.gradients(self.critic.output, self.critic.input)
@@ -88,7 +87,7 @@ class DDPGAgent:
         self.memory.append((state, action, reward, next_state, done))
 
     def train_model(self):
-        # make minibatch from replay memory
+        # make mini-batch from replay memory
         mini_batch = random.sample(self.memory, self.batch_size)
 
         states = np.asarray([e[0] for e in mini_batch])
@@ -127,10 +126,10 @@ if __name__ == "__main__":
     state_size = env.observation_space.shape[0]
     action_size = env.action_space.shape[0]
 
-    # make A2C agent
+    # make DDPG agent
     agent = DDPGAgent(state_size, action_size)
 
-    print('testing sample agent on torcs')
+    print('testing sample agent on pendulum')
     global_step = 0
 
     for e in range(2000):
@@ -147,8 +146,8 @@ if __name__ == "__main__":
             global_step += 1
             action = agent.get_action(np.reshape(state, [1, state_size]))
             next_state, reward, done, info = env.step(action)
-            reward /= 10
             score += reward
+            reward /= 10
 
             agent.append_sample(state, action, reward, next_state, done)
 
@@ -159,8 +158,14 @@ if __name__ == "__main__":
 
             if done:
                 agent.update_target_model()
+
+                if agent.epsilon >= 0:
+                    epsilon = agent.epsilon
+                else:
+                    epsilon = 0
+
                 print('episode: ', e, ' score: ', score, ' step: ', global_step,
-                      ' epsilon: ', agent.epsilon)
+                      ' epsilon: ', epsilon)
 
         # save the model
         if e % 50 == 0:
