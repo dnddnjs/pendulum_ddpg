@@ -6,6 +6,7 @@ from collections import deque
 import tensorflow as tf
 import numpy as np
 import random
+import pylab
 import gym
 
 
@@ -131,6 +132,7 @@ if __name__ == "__main__":
 
     print('testing sample agent on pendulum')
     global_step = 0
+    scores, episodes = [], []
 
     for e in range(2000):
         done = False
@@ -158,6 +160,10 @@ if __name__ == "__main__":
 
             if done:
                 agent.update_target_model()
+                scores.append(score)
+                episodes.append(e)
+                pylab.plot(episodes, scores, 'b')
+                pylab.savefig("./save_graph/pendulum_ddpg_.png")
 
                 if agent.epsilon >= 0:
                     epsilon = agent.epsilon
