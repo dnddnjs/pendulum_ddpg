@@ -1,6 +1,7 @@
 # pendulum_ddpg
 continuous control of pendulum with ddpg
 [ddpg paper](https://arxiv.org/abs/1509.02971)
+![trained agent](/img/pendulum.gif)
 
 ## Deep Deterministic Policy Gradient
 One can have trouble with applying value-based reinforcement learning to continuous action problem. In DQN, most famous value-based RL algorithm, agent choose action according to the epsilon-greedy action selection strategy. But if action is continuous, choosing according to Q-function becomes problem.
