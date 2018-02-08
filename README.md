@@ -9,5 +9,18 @@ DDPG(Deep Deterministic Policy Gradient) is an variant of policy gradient algori
 
 Most Policy Gradient Algorithms uses "[Policy Gradient Theorem](https://papers.nips.cc/paper/1713-policy-gradient-methods-for-reinforcement-learning-with-function-approximation.pdf)". David Silver proved policy gradient theorem can be applied to deterministic policy and called it as deterministic policy gradient theorem. 
 
-The policy gradient of objective function by the "determinitic policy gradient theorem" is like this.
-$$\epsilon$$
+The policy gradient of objective function by the "determinitic policy gradient theorem". It is gradient of Q-function of the selected action and using chain-rule, one can get the policy gradient of deterministic policy gradient.
+
+## Requirements
+1. Python 3.5
+2. Tensorflow
+3. Keras
+4. numpy
+5. scipy
+6. matplotlib
+7. h5py
+8. gym
+
+## Example
+I used Pendulum-v0 environment of openai gym to test ddpg algorithm. Is is simplist continuous action envirnoment.
+
