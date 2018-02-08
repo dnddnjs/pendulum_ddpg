@@ -1,7 +1,7 @@
 # pendulum_ddpg
 continuous control of pendulum with ddpg
 [ddpg paper](https://arxiv.org/abs/1509.02971)
-![trained agent](/img/pendulum.gif)
+<center><img src="/img/pendulum.gif" width="300" height="300"></center>
 
 ## Deep Deterministic Policy Gradient
 One can have trouble with applying value-based reinforcement learning to continuous action problem. In DQN, most famous value-based RL algorithm, agent choose action according to the epsilon-greedy action selection strategy. But if action is continuous, choosing according to Q-function becomes problem.
@@ -23,5 +23,8 @@ The policy gradient of objective function by the "determinitic policy gradient t
 8. gym
 
 ## Example
-I used Pendulum-v0 environment of openai gym to test ddpg algorithm. Is is simplist continuous action envirnoment.
+I used [Pendulum-v0](https://gym.openai.com/envs/Pendulum-v0/) environment of openai gym to test ddpg algorithm. It is simplist continuous action environment. You can train ddpg agent like this
+'''shell
+python3 pendulum_ddpg.py
+'''
 
