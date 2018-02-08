@@ -1,6 +1,7 @@
 # pendulum_ddpg
 continuous control of pendulum with ddpg
 [ddpg paper](https://arxiv.org/abs/1509.02971)
+
 <img src="/img/pendulum.gif" width="300" height="300">
 
 ## Deep Deterministic Policy Gradient
